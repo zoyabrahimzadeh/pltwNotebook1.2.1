@@ -4,19 +4,24 @@ import turtle
 import random as rand
 #-----game configuration----
 turtle_color = 'lightgreen'
-turtle_size = 3
+turtle_size = 1
 turtle_shape = 'square'
 score = 0
+font_setup = ("Arial", 20, "normal")
 #-----initialize turtle-----
 shortie = turtle.Turtle()
 score_writer = turtle.Turtle()
+score_writer.hideturtle()
+score_writer.penup()
+score_writer.goto(350,250)
 shortie.shape(turtle_shape)
 shortie.fillcolor(turtle_color)
 shortie.shapesize(turtle_size)
 #-----game functions--------
 def shortie_clicked(x, y):
-  update_score()
   change_position()
+  score_writer.clear()
+  update_score()
 def change_position():
   new_xpos = rand.randint(-400,400)
   new_ypos = rand.randint(-300, 300)
@@ -28,8 +33,7 @@ def change_position():
 def update_score():
   global score
   score += 1
-  print(score)
-
+  score_writer.write(score, font=font_setup)
 #-----events----------------
 shortie.onclick(shortie_clicked)
 wn = turtle.Screen()
