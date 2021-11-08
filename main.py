@@ -11,6 +11,8 @@ font_setup = ("Arial", 20, "normal")
 timer = 30
 counter_interval = 1000   #1000 represents 1 second
 timer_up = False
+colors = ['purple', 'blue', 'lightblue', 'yellow', 'white', 'yellow', 'green', 'pink']
+sizes = [3, 2.5, 2, 1.5, 1.2, 1, 0.75, 0.5]
 #-----initialize turtle-----
 shortie = turtle.Turtle()
 score_writer = turtle.Turtle()
@@ -26,6 +28,9 @@ counter.penup()
 counter.goto(-300, 285)
 #-----game functions--------
 def shortie_clicked(x, y):
+  change_color()
+  change_size()
+  shortie.color('lightgreen')
   change_position()
   score_writer.clear()
   update_score()
@@ -58,9 +63,14 @@ def countdown():
     counter.write("Timer: " + str(timer), font=font_setup)
     timer -= 1
     counter.getscreen().ontimer(countdown, counter_interval)
-
+def change_color():
+  shortie.color(rand.choice(colors))
+  shortie.stamp()
+def change_size():
+  shortie.turtlesize(rand.choice(sizes))
 #-----events----------------
 wn = turtle.Screen()
+wn.bgcolor('red')
 wn.ontimer(countdown, counter_interval) 
 shortie.onclick(shortie_clicked)
 wn.mainloop()
